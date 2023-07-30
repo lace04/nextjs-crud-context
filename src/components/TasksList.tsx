@@ -1,7 +1,7 @@
 import React from 'react';
 import { Task } from '@/interfaces/task.interface';
 import TaskCard from '@/components/TaskCard';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { AnimatePresence } from 'framer-motion';
 
 interface Props {
   tasks: Task[];
@@ -10,17 +10,19 @@ interface Props {
 function TasksList({ tasks }: Props) {
   return (
     <div className=''>
-      {tasks.length > 0 ? (
-        <div className='grid grid-cols-3 p-2 gap-2'>
-          {tasks.map((task, index) => (
-            <TaskCard key={task.id} task={task} index={index} />
-          ))}
-        </div>
-      ) : (
-        <h1 className='text-4xl h-screen flex justify-center items-center'>
-          No tasks
-        </h1>
-      )}
+      <AnimatePresence>
+        {tasks.length > 0 ? (
+          <div className='grid grid-cols-3 p-2 gap-2'>
+            {tasks.map((task, index) => (
+              <TaskCard key={task.id} task={task} index={index} />
+            ))}
+          </div>
+        ) : (
+          <h1 className='text-4xl h-screen flex justify-center items-center'>
+            No tasks
+          </h1>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

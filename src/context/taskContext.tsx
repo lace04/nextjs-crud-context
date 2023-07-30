@@ -9,11 +9,13 @@ const taskContext = createContext<{
   createTask: (task: Task) => void;
   updatedTask: (id: string, task: Task) => void;
   deleteTask: (id: string) => void;
+  loadTasks: () => void;
 }>({
   tasks: [],
   createTask: () => {},
   updatedTask: () => {},
   deleteTask: () => {},
+  loadTasks: () => {},
 });
 
 //hook
@@ -29,7 +31,23 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const loadTasks = async () => {
-    // implementation goes here
+    const tasks: Task[] = [
+      {
+        id: '1',
+        title: 'Learn React',
+        description: 'Learn react with typescript',
+      },
+      {
+        id: '2',
+        title: 'Learn Node',
+        description: 'Learn node with typescript',
+      },
+      {
+        id: '3',
+        title: 'Learn Next',
+        description: 'Learn next with typescript',
+      },
+    ];
   };
 
   const createTask = async (task: Task) => {
@@ -49,7 +67,7 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <taskContext.Provider
-      value={{ tasks, createTask, updatedTask, deleteTask }}
+      value={{ tasks, createTask, updatedTask, deleteTask, loadTasks }}
     >
       {children}
     </taskContext.Provider>
